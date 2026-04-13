@@ -1,3 +1,5 @@
+from math import *
+
 def parse_relation(relation):
     parsed_relation = (None,None,None)
     possible_exp = ["=","!=",">","<",">=","<="]
@@ -19,6 +21,16 @@ def extract_relation(exp,sign):
         r = r.removeprefix("*")
         a = a.replace(e,r)
 
+def calculate_relation(relation,X,Y):
+    rel = set()
+    for x in X:
+        for y in Y:
+            a,b,exp = parse_relation(relation)
+            a = a.replace("x",str(x)).replace("y",str(y))
+            b = b.replace("x",str(x)).replace("y",str(y))
+            if eval(a+exp+b):
+                rel.add((x,y))
+    return rel
         
     for e in b.split("+"):
         for f in range(len(e)):
