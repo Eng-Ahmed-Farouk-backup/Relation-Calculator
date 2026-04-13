@@ -41,3 +41,19 @@ def calculate_relation(relation,X,Y):
         b = b.replace(e,r)
             
     return a.strip(),b.strip()
+
+def calculate_domain(relation,X,Y):
+    domain = set()
+
+    rel = calculate_relation(relation,X,Y)
+    for x,y in rel:
+        domain.add(x)
+    return domain
+            
+def calculate_range(relation,X,Y):
+    range_ = set()
+
+    rel = calculate_relation(relation,X,Y)
+    for x,y in rel:
+        range_.add(y)
+    return range_
