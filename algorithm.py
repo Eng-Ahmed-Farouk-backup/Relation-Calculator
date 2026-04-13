@@ -21,6 +21,17 @@ def extract_relation(exp,sign):
         r = r.removeprefix("*")
         a = a.replace(e,r)
 
+        
+    for e in b.split("+"):
+        for f in range(len(e)):
+            r = e
+            if e[f].isalpha() and e[f-1].isdigit():
+                r = e.replace(e[f],f"*{e[f]}")
+        r = r.removeprefix("*")
+        b = b.replace(e,r)
+            
+    return a.strip(),b.strip()
+
 def calculate_relation(relation,X,Y):
     rel = set()
     for x in X:
