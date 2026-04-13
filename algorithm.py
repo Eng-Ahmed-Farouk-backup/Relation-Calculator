@@ -1,0 +1,31 @@
+def parse_relation(relation):
+    parsed_relation = (None,None,None)
+    possible_exp = ["=","!=",">","<",">=","<="]
+    for exp in possible_exp:
+        if exp in relation:
+            a,b = extract_relation(relation,exp)
+            if exp == "=":
+                exp = "=="
+            parsed_relation = (a,b,exp)
+    return parsed_relation
+
+def extract_relation(exp,sign):
+    a,b = exp.replace("^","**").split(sign)
+    for e in a.split("+"):
+        r = e
+        for f in range(len(e)):
+            if e[f].isalpha() and e[f-1].isdigit():
+                r = e.replace(e[f],f"*{e[f]}")
+        r = r.removeprefix("*")
+        a = a.replace(e,r)
+
+        
+    for e in b.split("+"):
+        for f in range(len(e)):
+            r = e
+            if e[f].isalpha() and e[f-1].isdigit():
+                r = e.replace(e[f],f"*{e[f]}")
+        r = r.removeprefix("*")
+        b = b.replace(e,r)
+            
+    return a.strip(),b.strip()
