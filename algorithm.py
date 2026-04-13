@@ -57,3 +57,17 @@ def calculate_range(relation,X,Y):
     for x,y in rel:
         range_.add(y)
     return range_
+
+def calculate_cartesian_product(X,Y):
+    return calculate_relation("1=1",X,Y)
+
+def is_function(relation,X,Y):
+    rel = calculate_relation(relation,X,Y)
+    for x in X:
+        count = 0
+        for y in Y:
+            if (x,y) in rel:
+                count += 1
+        if count != 1:
+            return False
+    return True
